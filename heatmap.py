@@ -35,6 +35,8 @@ def gen_pop_kml(db, filename):
     print abs_data[0:4]
     pop_data = dict()
     for row in cur:
-        if row is not None:
+        if row[1] is not None:
             pop_data[row[0]] = parse_multipolygon(kml, row[1])
     kml.save(filename)
+
+gen_pop_kml(DB(), 'pop.kml')
