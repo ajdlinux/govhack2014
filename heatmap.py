@@ -2,6 +2,7 @@ import simplekml
 from db import *
 from abs_stat import *
 import re
+import os
 
 class colour_map:
     def __init__(self, values):
@@ -43,18 +44,23 @@ def parse_multipolygon(kml, code, db_poly, abs_data, colmap):
         kml_poly = multipoly.newpolygon()
         kml_poly.outerboundaryis = points
 
-def gen_pop_kml(db, filename):
+def gen_kml(db, sa2_values, kml_filename):
     kml = simplekml.Kml()
     # get boundary data
     cur = db.cursor()
     cur.execute("select sa2_main, ST_AsText(geom) from sa2 where sa2_main like '8%' order by sa2_main asc")
-    
-    # get population data
-    abs_data = get_pop_data()
-    colmap = colour_map(abs_data)
+    # do stuff with it
+    colmap = colour_map(sa2_values)
     for row in cur:
         if row[1] is not None:
             parse_multipolygon(kml, int(row[0]), row[1], abs_data, colmap)
     kml.save(filename)
 
-gen_pop_kml(DB(), 'assets/pop.kml')
+def gen_all_kml(db, folder):
+    for name,f in get_data_funcs():
+        data = f()
+        gen_kml(db, data, os.path.join(folder, name)
+
+db = DB()
+gen_all_kml(db, "assets")
+db.close()

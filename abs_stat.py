@@ -72,7 +72,7 @@ def get_age_data():
     return abs_get_parse(d)
 
 # median person income of persons per week by SA2
-def get_age_data():
+def get_income_data():
     d = dict()
     add_sa2(d)
     d['method'] = 'GetGenericData'
@@ -81,10 +81,14 @@ def get_age_data():
     return abs_get_parse(d)
 
 # average persons per household by SA2
-def get_age_data():
+def get_household_data():
     d = dict()
     add_sa2(d)
     d['method'] = 'GetGenericData'
     d['datasetid'] = 'ABS_CENSUS2011_B02'
     d['and'] += ',MEASURE.AHS'
     return abs_get_parse(d)
+
+def get_data_funcs():
+    return [('population', get_pop_data), ('age', get_age_data), 
+        ('income', get_income_data), ('household', get_household_data)]
