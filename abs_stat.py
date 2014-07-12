@@ -11,9 +11,10 @@ def abs_get(get_dict):
     f.close()
     return data
 
-def abs_api_error(Exception):
+class abs_api_error(Exception):
     pass
 
+# call query and return as dict from region (int) to observation (float)
 def abs_get_parse(get_dict):
     raw = abs_get(get_dict)
     abs_data = dict()
