@@ -119,6 +119,5 @@ def get_scores(codes, params):
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.values()}
         
         for code in codes:
-            scores[dataset] = (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
+            scores[code] = (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
     return scores
-    
