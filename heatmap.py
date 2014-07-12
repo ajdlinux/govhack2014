@@ -7,7 +7,14 @@ def parse_multipolygon(kml, db_poly):
     multipoly = kml.newmultigeometry()
     db_poly = db_poly[14:-2]
     for poly in db_poly.split('),('):
-        points = [[int(d) for d in point.split(' ')] for point in poly.split(',')]
+        spoints = [point.split(' ') for point in poly.split(',')]
+        points = []
+        for p in spoints:
+            if p[0].startswith('('):
+                p[0] = p[0][1:]
+            if p[1].endswith(')'):
+                p[1] = p[1][:1]
+            points.append((int(p[0]), int(p[1])))
         kml_poly = multipoly.newpolygon()
         kml_poly.outboundaryis(points)
 
@@ -21,10 +28,12 @@ def gen_pop_kml(db, filename):
     d = dict()
     add_sa2(d)
     d['method'] = 'GetGenericData'
-    d['add'] += ',MEASURE.TT,POUR.TOT'
+    d['and'] += ',MEASURE.TT,POUR.TOT'
     d['datasetid'] = 'ABS_CENSUS2011_B03'
+    print d
     abs_data = abs_get(d)['series']
+    print abs_data[0:4]
     pop_data = dict()
     for row in cur:
-        pop_data[row[0]] = parse_multpolygon(kml, row[1])
+        pop_data[row[0]] = parse_multipolygon(kml, row[1])
     kml.save(filename)
