@@ -26,9 +26,9 @@ class ColourMap(object):
         colstring = "%02x%02x%02x%02x" % (self.a, col['g'], col['b'], col['r'])
         return colstring
 
-def parse_multipolygon(kml, code, db_poly, abs_data, colmap):
+def parse_multipolygon(kml, code, db_poly, score_data, colmap):
     multipoly = kml.newmultigeometry()
-    multipoly.style.polystyle.color = colmap.get_value(abs_data[code])
+    multipoly.style.polystyle.color = colmap.get_value(score_data[code])
     db_poly = db_poly[14:-2]
     for poly in db_poly.split('),('):
         spoints = [point.split(' ') for point in poly.split(',')]
