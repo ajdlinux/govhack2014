@@ -8,7 +8,6 @@ def parse_multipolygon(kml, db_poly):
     db_poly = db_poly[14:-2]
     for poly in db_poly.split('),('):
         spoints = [point.split(' ') for point in poly.split(',')]
-        print spoints
         points = []
         for p in spoints:
             if p[0].startswith('('):
@@ -36,5 +35,6 @@ def gen_pop_kml(db, filename):
     print abs_data[0:4]
     pop_data = dict()
     for row in cur:
-        pop_data[row[0]] = parse_multipolygon(kml, row[1])
+        if row is not None:
+            pop_data[row[0]] = parse_multipolygon(kml, row[1])
     kml.save(filename)
