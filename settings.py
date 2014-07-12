@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Where should I? - a tool to help you find where to do things!
 Copyright © 2014 Andrew Donnellan, Teresa Bradbury, Suzette Bailey, Craig Thomler.
