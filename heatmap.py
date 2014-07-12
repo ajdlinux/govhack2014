@@ -42,7 +42,19 @@ def parse_multipolygon(kml, code, db_poly, score_data, colmap):
         kml_poly = multipoly.newpolygon()
         kml_poly.outerboundaryis = points
 
-def gen_kml(db, sa2_values, kml_filename):
+def gen_kml(db, sa2_values):
+    kml = simplekml.Kml()
+    # get boundary data
+    cur = db.cursor()
+    cur.execute("select sa2_main, ST_AsText(geom) from sa2 where sa2_main like '8%' order by sa2_main asc")
+    # do stuff with it
+    colmap = ColourMap(sa2_values)
+    for row in cur:
+        if row[1] is not None:
+            parse_multipolygon(kml, int(row[0]), row[1], sa2_values, colmap)
+    return kml.kml()
+
+def gen_kml_file(db, sa2_values, kml_filename):
     kml = simplekml.Kml()
     # get boundary data
     cur = db.cursor()
@@ -58,7 +70,7 @@ def gen_all_kml(db, folder):
     for name,f in get_data_funcs():
         data = f()
         print "Got data for %s" % name
-        gen_kml(db, data, os.path.join(folder, name + '.kml'))
+        gen_kml_file(db, data, os.path.join(folder, name + '.kml'))
         print "Finished %s" % name
 
 db = DB()
