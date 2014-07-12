@@ -23,9 +23,7 @@ class colour_map:
             for c in ('r', 'g', 'b'):
                 col[c] = self.mincol[c] + (self.maxcol[c] - self.mincol[c]) * (x - self.min) / self.range
                 col[c] = int(round(col[c]))
-        print col
         colstring = "%02x%02x%02x%02x" % (self.a, col['g'], col['b'], col['r'])
-        print colstring
         return colstring
 
 def parse_multipolygon(kml, code, db_poly, abs_data, colmap):
@@ -53,13 +51,14 @@ def gen_kml(db, sa2_values, kml_filename):
     colmap = colour_map(sa2_values)
     for row in cur:
         if row[1] is not None:
-            parse_multipolygon(kml, int(row[0]), row[1], abs_data, colmap)
-    kml.save(filename)
+            parse_multipolygon(kml, int(row[0]), row[1], sa2_values, colmap)
+    kml.save(kml_filename)
 
 def gen_all_kml(db, folder):
     for name,f in get_data_funcs():
         data = f()
-        gen_kml(db, data, os.path.join(folder, name)
+        gen_kml(db, data, os.path.join(folder, name))
+        print "Finished %s" % name
 
 db = DB()
 gen_all_kml(db, "assets")
