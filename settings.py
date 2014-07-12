@@ -29,3 +29,7 @@ DB_PORT         = 5432
 DB_DATABASE     = 'whereshouldi'
 DB_USER         = 'whereshouldi'
 DB_PASSWORD     = 'whereshouldi'
+
+# ABS Data settings
+ABS_CSV = True
+ABS_CSV_PATH = 'data/DataPacks/ACT'

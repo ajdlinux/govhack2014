@@ -2,12 +2,18 @@ import os
 import urllib
 import urllib2
 import json
+import csv
+from settings import *
+
+class ABSAPIError(Exception):
+    pass
 
 def abs_get(get_dict):
     base = "http://stat.abs.gov.au/itt/query.jsp?"
     get_dict['format'] = 'json'
     args = urllib.urlencode(get_dict)
     if not os.path.exists('cache/%s' % args):
+        print "Retrieving from: %s" % (base+args)
         f = urllib2.urlopen(base + args)
         cache_file = open('cache/%s' % args, 'w')
         cache_file.write(f.read())
@@ -18,8 +24,12 @@ def abs_get(get_dict):
     f.close()
     return data
 
-class ABSAPIError(Exception):
-    pass
+def abs_get_csv(table, field):
+    with open(os.path.join(ABS_CSV_PATH, "2011Census_%s_ACT_SA2_short.csv" % table)) \
+         as f:
+        r = csv.DictReader(f)
+        result = {row['region_id']: float(row[field]) for row in r}
+    return result
 
 # call query and return as dict from region (int) to observation (float)
 def abs_get_parse(get_dict):
@@ -63,39 +73,51 @@ def add_sa2(dict):
 
 # usual place of residence (probably)
 def get_pop_data():
-    d = dict()
-    add_sa2(d)
-    d['method'] = 'GetGenericData'
-    d['datasetid'] = 'ABS_CENSUS2011_B03'
-    d['and'] += ',MEASURE.TT,POUR.TOT'
-    return abs_get_parse(d)
+    if ABS_CSV:
+        return abs_get_csv('B03', 'Total_Total')
+    else:
+        d = dict()
+        add_sa2(d)
+        d['method'] = 'GetGenericData'
+        d['datasetid'] = 'ABS_CENSUS2011_B03'
+        d['and'] += ',MEASURE.TT,POUR.TOT'
+        return abs_get_parse(d)
 
 # median age of persons by SA2
 def get_age_data():
-    d = dict()
-    add_sa2(d)
-    d['method'] = 'GetGenericData'
-    d['datasetid'] = 'ABS_CENSUS2011_B02'
-    d['and'] += ',MEASURE.MAGE'
-    return abs_get_parse(d)
+    if ABS_CSV:
+        return abs_get_csv('B02', 'Median_age_persons')
+    else:
+        d = dict()
+        add_sa2(d)
+        d['method'] = 'GetGenericData'
+        d['datasetid'] = 'ABS_CENSUS2011_B02'
+        d['and'] += ',MEASURE.MAGE'
+        return abs_get_parse(d)
 
 # median person income of persons per week by SA2
 def get_income_data():
-    d = dict()
-    add_sa2(d)
-    d['method'] = 'GetGenericData'
-    d['datasetid'] = 'ABS_CENSUS2011_B02'
-    d['and'] += ',MEASURE.MIPI'
-    return abs_get_parse(d)
+    if ABS_CSV:
+        return abs_get_csv('B02', 'Median_Tot_prsnl_inc_weekly')
+    else:
+        d = dict()
+        add_sa2(d)
+        d['method'] = 'GetGenericData'
+        d['datasetid'] = 'ABS_CENSUS2011_B02'
+        d['and'] += ',MEASURE.MIPI'
+        return abs_get_parse(d)
 
 # average persons per household by SA2
 def get_household_data():
-    d = dict()
-    add_sa2(d)
-    d['method'] = 'GetGenericData'
-    d['datasetid'] = 'ABS_CENSUS2011_B02'
-    d['and'] += ',MEASURE.AHS'
-    return abs_get_parse(d)
+    if ABS_CSV:
+        return abs_get_csv('B02', 'Average_household_size')
+    else:
+        d = dict()
+        add_sa2(d)
+        d['method'] = 'GetGenericData'
+        d['datasetid'] = 'ABS_CENSUS2011_B02'
+        d['and'] += ',MEASURE.AHS'
+        return abs_get_parse(d)
 
 data_funcs = {'population': get_pop_data,
               'age': get_age_data,
@@ -119,5 +141,5 @@ def get_scores(codes, params):
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.values()}
         
         for code in codes:
-            scores[code] = (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
+            scores[code] += (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
     return scores
