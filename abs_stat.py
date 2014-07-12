@@ -26,3 +26,11 @@ def get_all_codes(datasetid):
 
 def pretty_print(data):
     print json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+
+def add_sa2(dict):
+    dict['or'] = 'REGION'
+    if 'and' in dict:
+        dict['and'] += ','
+    else:
+        dict['and'] = ''
+    dict['and'] += 'STATE.8,REGIONTYPE.SA2'
