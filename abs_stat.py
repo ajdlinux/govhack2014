@@ -7,7 +7,7 @@ def abs_get(get_dict):
     base = "http://stat.abs.gov.au/itt/query.jsp?"
     get_dict['format'] = 'json'
     args = urllib.urlencode(get_dict)
-    if not os.exists('cache/%s' % args):
+    if not os.path.exists('cache/%s' % args):
         f = urllib2.urlopen(base + args)
         cache_file = open('cache/%s' % args, 'w')
         cache_file.write(f.read())
