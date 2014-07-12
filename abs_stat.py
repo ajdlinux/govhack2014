@@ -11,6 +11,24 @@ def abs_get(get_dict):
     f.close()
     return data
 
+def abs_api_error(Exception):
+    pass
+
+def abs_get_parse(get_dict):
+    raw = abs_get(get_dict)
+    abs_data = dict()
+    for a in raw['series']:
+        region = -1
+        for b in list['concepts']:
+            if b['name'] == 'REGION':
+                region = int(b['Value'])
+                break
+        if region == -1:
+            print 'Failed to find REGION code'
+            raise abs_api_error('No REGION code found')
+        abs_data[region] = float(a['observations'][0]['Value'])
+    return abs_data
+
 def get_concepts(datasetid):
     return abs_get({'method' : 'GetDatasetConcepts', 'datasetid' : datasetid})['concepts']
 
@@ -42,9 +60,6 @@ def get_pop_data():
     d['and'] += ',MEASURE.TT,POUR.TOT'
     d['datasetid'] = 'ABS_CENSUS2011_B03'
     print d
-    abs_dataj = abs_get(d)['series']
-    abs_data = dict()
-    for p in abs_dataj:
-        abs_data[int(p['concepts'][4]["Value"])] = float(p['observations'][0]['Value'])
-    return abs_data
+    return abs_get_parse(d)
+
 
