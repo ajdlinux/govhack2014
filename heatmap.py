@@ -14,7 +14,7 @@ def parse_multipolygon(kml, db_poly):
             if p[0].startswith('('):
                 p[0] = p[0][1:]
             if p[1].endswith(')'):
-                p[1] = p[1][:1]
+                p[1] = p[1][:-1]
             points.append((float(p[0]), float(p[1])))
         kml_poly = multipoly.newpolygon()
         kml_poly.outboundaryis(points)
