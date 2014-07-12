@@ -16,7 +16,7 @@ def parse_multipolygon(kml, db_poly):
                 p[1] = p[1][:-1]
             points.append((float(p[0]), float(p[1])))
         kml_poly = multipoly.newpolygon()
-        kml_poly.outboundaryis(points)
+        kml_poly.outerboundaryis = points
 
 def gen_pop_kml(db, filename):
     kml = simplekml.Kml()
