@@ -22,3 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 SERVER_HOSTNAME = "whereshouldi.donnellan.id.au"
 SERVER_HOST = "0.0.0.0"
 SERVER_PORT = 8080
+
+# Database details
+DB_HOST         = 'localhost'
+DB_PORT         = 5432
+DB_DATABASE     = 'whereshouldi'
+DB_USER         = 'whereshouldi'
+DB_PASSWORD     = 'whereshouldi'
