@@ -3,7 +3,7 @@
 sudo apt-get update
 sudo apt-get -y upgrade
 
-sudo apt-get -y install python-virtualenv python-dev postgresql-9.3 postgis postgresql-9.3-postgis-2.1 postgresql-contrib-9.3 libpq-dev git fabric phppgadmin # libxml2-dev libxslt1-dev
+sudo apt-get -y install python-virtualenv python-dev postgresql-9.3 postgis postgresql-9.3-postgis-2.1 postgresql-contrib-9.3 libpq-dev git fabric phppgadmin libxml2-dev libxslt1-dev
 
 cd /vagrant
 

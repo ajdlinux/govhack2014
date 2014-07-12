@@ -21,7 +21,7 @@ def setup():
 
 def init_ec2():
     run("sudo apt-get update; sudo apt-get upgrade -y")
-    # run("sudo apt-get install STUFF")
+    run("sudo apt-get install -y python-virtualenv python-dev postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 libpq-dev git fabric phppgadmin libxml2-dev libxslt1-dev python-pip")
     run("[ -e /home/wsi ] || sudo useradd -m wsi")
     run("sudo rm -rf /home/wsi/whereshouldi")
     run("sudo -u wsi git clone git://github.com/ajdlinux/govhack2014.git /home/wsi/whereshouldi")
