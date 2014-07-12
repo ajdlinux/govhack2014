@@ -15,14 +15,15 @@ def setup():
     #local("easy_install http://closure-linter.googlecode.com/files/closure_linter-latest.tar.gz")
     
     # Database
-    local("sudo -u postgres psql -f tools/init_db.sql")
+    local("sudo -u postgres psql -f tools/create_db.sql")
+    local("sudo -u postgres psql -f tools/init_db.sql whereshouldi")
     local("tools/setup_wsi.py")
 
 
 def init_ec2():
     run("sudo apt-get update; sudo apt-get upgrade -y")
     run("sudo apt-get install -y supervisor nginx apache2-")
-    run("sudo apt-get install -y python-virtualenv python-dev postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 libpq-dev git fabric phppgadmin libxml2-dev libxslt1-dev python-pip")
+    run("sudo apt-get install -y python-virtualenv python-dev postgresql-9.3 postgis postgresql-9.3-postgis-2.1 postgresql-contrib-9.3 libpq-dev git fabric phppgadmin libxml2-dev libxslt1-dev postgresql-client-9.3 python-pip")
     run("[ -e /home/wsi ] || sudo useradd -m wsi")
     run("sudo rm -rf /home/wsi/whereshouldi")
     run("sudo -u wsi git clone git://github.com/ajdlinux/govhack2014.git /home/wsi/whereshouldi")
