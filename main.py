@@ -44,6 +44,14 @@ def about():
 def contact():
     return {}
 
+@bottle.route('/map')
+@bottle.view('map')
+def map():
+    return {}
+
+@bottle.route('/<path:path>')
+def static(path):
+    return bottle.static_file(path, root=os.path.join(os.path.dirname(__file__), 'assets'))
 
 if __name__ == "__main__":
     # Make sure we're in the right directory!
