@@ -19,7 +19,7 @@ def abs_get_parse(get_dict):
     abs_data = dict()
     for a in raw['series']:
         region = -1
-        for b in list['concepts']:
+        for b in a['concepts']:
             if b['name'] == 'REGION':
                 region = int(b['Value'])
                 break
@@ -53,13 +53,38 @@ def add_sa2(dict):
         dict['and'] = ''
     dict['and'] += 'STATE.8,REGIONTYPE.SA2'
 
+# usual place of residence (probably)
 def get_pop_data():
     d = dict()
     add_sa2(d)
     d['method'] = 'GetGenericData'
-    d['and'] += ',MEASURE.TT,POUR.TOT'
     d['datasetid'] = 'ABS_CENSUS2011_B03'
-    print d
+    d['and'] += ',MEASURE.TT,POUR.TOT'
     return abs_get_parse(d)
 
+# median age of persons by SA2
+def get_age_data():
+    d = dict()
+    add_sa2(d)
+    d['method'] = 'GetGenericData'
+    d['datasetid'] = 'ABS_CENSUS2011_B02'
+    d['and'] += ',MEASURE.MAGE'
+    return abs_get_parse(d)
 
+# median person income of persons per week by SA2
+def get_age_data():
+    d = dict()
+    add_sa2(d)
+    d['method'] = 'GetGenericData'
+    d['datasetid'] = 'ABS_CENSUS2011_B02'
+    d['and'] += ',MEASURE.MIPI'
+    return abs_get_parse(d)
+
+# average persons per household by SA2
+def get_age_data():
+    d = dict()
+    add_sa2(d)
+    d['method'] = 'GetGenericData'
+    d['datasetid'] = 'ABS_CENSUS2011_B02'
+    d['and'] += ',MEASURE.AHS'
+    return abs_get_parse(d)
