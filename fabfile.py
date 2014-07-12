@@ -15,8 +15,8 @@ def setup():
     #local("easy_install http://closure-linter.googlecode.com/files/closure_linter-latest.tar.gz")
     
     # Database
-    local("sudo -u postgres psql -f data/create_db.sql")
-    local("tools/import_data.sh") # TODO: or whatever we're doing
+    local("sudo -u postgres psql -f tools/init_db.sql")
+    local("tools/setup_wsi.py")
 
 
 def init_ec2():
@@ -26,7 +26,7 @@ def init_ec2():
     run("sudo rm -rf /home/wsi/whereshouldi")
     run("sudo -u wsi git clone git://github.com/ajdlinux/govhack2014.git /home/wsi/whereshouldi")
     run("cd /home/wsi/whereshouldi; sudo fab setup")
-    run("cd /home/wsi/whereshouldi; sudo tools/import_data.sh") # TODO: or whatever we're doing
+    #run("cd /home/wsi/whereshouldi; sudo tools/setup_wsi.py")
     run("""cat > /tmp/wsi.conf << __EOF__
     [program:wsi]
 user=wsi
