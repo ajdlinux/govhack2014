@@ -4,7 +4,7 @@ from abs_stat import *
 import re
 import os
 
-class colour_map:
+class ColourMap(object):
     def __init__(self, values):
         self.min = min(values.values())
         self.max = max(values.values())
@@ -48,7 +48,7 @@ def gen_kml(db, sa2_values, kml_filename):
     cur = db.cursor()
     cur.execute("select sa2_main, ST_AsText(geom) from sa2 where sa2_main like '8%' order by sa2_main asc")
     # do stuff with it
-    colmap = colour_map(sa2_values)
+    colmap = ColourMap(sa2_values)
     for row in cur:
         if row[1] is not None:
             parse_multipolygon(kml, int(row[0]), row[1], sa2_values, colmap)
