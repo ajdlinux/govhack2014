@@ -11,7 +11,7 @@ def abs_get(get_dict):
     f.close()
     return data
 
-class abs_api_error(Exception):
+class ABSAPIError(Exception):
     pass
 
 # call query and return as dict from region (int) to observation (float)
@@ -26,7 +26,7 @@ def abs_get_parse(get_dict):
                 break
         if region == -1:
             print 'Failed to find REGION code'
-            raise abs_api_error('No REGION code found')
+            raise ABSAPIError('No REGION code found')
         abs_data[region] = float(a['observations'][0]['Value'])
     return abs_data
 
