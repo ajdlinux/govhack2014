@@ -50,17 +50,7 @@ def gen_pop_kml(db, filename):
     cur.execute("select sa2_main, ST_AsText(geom) from sa2 where sa2_main like '8%' order by sa2_main asc")
     
     # get population data
-    d = dict()
-    add_sa2(d)
-    d['method'] = 'GetGenericData'
-    d['and'] += ',MEASURE.TT,POUR.TOT'
-    d['datasetid'] = 'ABS_CENSUS2011_B03'
-    print d
-    abs_dataj = abs_get(d)['series']
-    abs_data = dict()
-    for p in abs_dataj:
-        abs_data[int(p['concepts'][4]["Value"])] = float(p['observations'][0]['Value'])
-    print abs_data
+    abs_data = get_pop_data()
     colmap = colour_map(abs_data)
     for row in cur:
         if row[1] is not None:

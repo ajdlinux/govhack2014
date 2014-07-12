@@ -34,3 +34,17 @@ def add_sa2(dict):
     else:
         dict['and'] = ''
     dict['and'] += 'STATE.8,REGIONTYPE.SA2'
+
+def get_pop_data():
+    d = dict()
+    add_sa2(d)
+    d['method'] = 'GetGenericData'
+    d['and'] += ',MEASURE.TT,POUR.TOT'
+    d['datasetid'] = 'ABS_CENSUS2011_B03'
+    print d
+    abs_dataj = abs_get(d)['series']
+    abs_data = dict()
+    for p in abs_dataj:
+        abs_data[int(p['concepts'][4]["Value"])] = float(p['observations'][0]['Value'])
+    return abs_data
+
