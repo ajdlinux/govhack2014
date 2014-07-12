@@ -66,4 +66,4 @@ __EOF__""")
 
 def update_ec2():
     run("sudo rm -rf /home/wsi/whereshouldi")
-    run("sudo -u pyp git clone git://github.com/ajdlinux/govhack2014.git /home/wsi/whereshouldi")
+    run("sudo -u wsi git clone git://github.com/ajdlinux/govhack2014.git /home/wsi/whereshouldi")
