@@ -57,9 +57,9 @@ def gen_pop_kml(db, filename):
     abs_dataj = abs_get(d)['series']
     abs_data = dict()
     for p in abs_dataj:
-        abs_data[p['concepts'][4]["Value"]]
+        abs_data[p['concepts'][4]["Name"]] = p['concepts'][4]["Value"]
+    print abs_data
     colmap = colour_map(abs_data)
-    pop_data = dict()
     for row in cur:
         if row[1] is not None:
             parse_multipolygon(kml, row[0], row[1], abs_data, colmap)
