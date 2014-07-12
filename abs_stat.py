@@ -1,3 +1,4 @@
+import os
 import urllib
 import urllib2
 import json
@@ -6,7 +7,13 @@ def abs_get(get_dict):
     base = "http://stat.abs.gov.au/itt/query.jsp?"
     get_dict['format'] = 'json'
     args = urllib.urlencode(get_dict)
-    f = urllib2.urlopen(base + args)
+    if not os.exists('cache/%s' % args):
+        f = urllib2.urlopen(base + args)
+        cache_file = open('cache/%s' % args, 'w')
+        cache_file.write(f.read())
+        f.close()
+        cache_file.close()
+    f = open('cache/%s' % args)
     data = json.load(f)
     f.close()
     return data
@@ -90,6 +97,28 @@ def get_household_data():
     d['and'] += ',MEASURE.AHS'
     return abs_get_parse(d)
 
+data_funcs = {'population': get_pop_data,
+              'age': get_age_data,
+              'income': get_income_data,
+              'household': get_household_data}
+
+
+
 def get_data_funcs():
     return [('population', get_pop_data), ('age', get_age_data), 
         ('income', get_income_data), ('household', get_household_data)]
+
+def get_scores(codes, params):
+    scores = {}
+    for dataset, value_rating, weighting in params:
+        values = data_funcs[dataset]()
+        
+        # Normalise
+        value_max = max(values.values())
+        value_min = min(values.values())
+        values = {k: (v - value_min) / (value_max - value_min) for k, v in values.values()}
+        
+        for code in codes:
+            scores[dataset] = (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
+    return scores
+    

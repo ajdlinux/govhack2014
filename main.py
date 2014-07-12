@@ -49,6 +49,14 @@ def contact():
 def map():
     return {}
 
+@bottle.route('/heatmap.kml')
+def heatmap():
+    return "" # TODO TODO TODO
+
+@bottle.route('/pointlayer.kml')
+def pointlayer():
+    return "" # TODO TODO TODO
+
 @bottle.route('/<path:path>')
 def static(path):
     return bottle.static_file(path, root=os.path.join(os.path.dirname(__file__), 'assets'))
