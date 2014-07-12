@@ -57,7 +57,8 @@ def gen_kml(db, sa2_values, kml_filename):
 def gen_all_kml(db, folder):
     for name,f in get_data_funcs():
         data = f()
-        gen_kml(db, data, os.path.join(folder, name))
+        print "Got data for %s" % name
+        gen_kml(db, data, os.path.join(folder, name + '.kml'))
         print "Finished %s" % name
 
 db = DB()
