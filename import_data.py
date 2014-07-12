@@ -7,8 +7,9 @@ def import_schools(db, filename):
     f.readline() # consume header
     for line in csv.reader(f):
         print line
-        coord = [for float(p) in line.strip('"').split(', ')]
-        line[5] = "POINT(%f %f)" % coord
+        coord = [float(p) for p in line[-1].strip('"').strip('(').strip(')').split(', ')]
+        print coord	
+        line[-1] = "(%f, %f)" % tuple(coord)
         cur.execute("insert into schools (name, address, Suburb, Sector, location) values (%s, %s, %s, %s, %s)", line)
     f.close()
 
