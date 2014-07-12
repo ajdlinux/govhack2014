@@ -8,8 +8,8 @@ class colour_map:
         self.min = min(values.values())
         self.max = max(values.values())
         self.range = self.max - self.min
-        self.mincol = {'r' : 0, 'g' : 255, 'b' : 255}
-        self.maxcol = {'r' : 255, 'g' : 255, 'b' : 255}
+        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
+        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
         self.a = 127
         
     def get_value(self, x):
@@ -23,7 +23,7 @@ class colour_map:
                 col[c] = self.mincol[c] + (self.maxcol[c] - self.mincol[c]) * (x - self.min) / self.range
                 col[c] = int(round(col[c]))
         print col
-        colstring = "%02x%02x%02x%02x" % (col['r'], col['g'], col['b'], self.a)
+        colstring = "%02x%02x%02x%02x" % (self.a, col['g'], col['b'], col['r'])
         print colstring
         return colstring
 
@@ -67,4 +67,4 @@ def gen_pop_kml(db, filename):
             parse_multipolygon(kml, int(row[0]), row[1], abs_data, colmap)
     kml.save(filename)
 
-gen_pop_kml(DB(), 'pop.kml')
+gen_pop_kml(DB(), 'assets/pop.kml')
