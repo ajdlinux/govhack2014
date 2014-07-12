@@ -130,7 +130,7 @@ def get_data_funcs():
     return [('population', get_pop_data), ('age', get_age_data), 
         ('income', get_income_data), ('household', get_household_data)]
 
-def get_scores(codes, params):
+def get_scores(params):
     scores = {}
     for dataset, value_rating, weighting in params:
         values = data_funcs[dataset]()
@@ -138,8 +138,8 @@ def get_scores(codes, params):
         # Normalise
         value_max = max(values.values())
         value_min = min(values.values())
-        values = {k: (v - value_min) / (value_max - value_min) for k, v in values.values()}
+        values = {k: (v - value_min) / (value_max - value_min) for k, v in values.items()}
         
-        for code in codes:
-            scores[code] += (1.0 - abs(values[code] - value_rating / 6.0)) * weighting
-    return scores
+        for k, v in values.items():
+            scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
+    return scores # we don't bother normalising, that can be done later
