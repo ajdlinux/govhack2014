@@ -5,8 +5,8 @@ import re
 
 class colour_map:
     def __init__(self, values):
-        self.min = min(values)
-        self.max = max(values)
+        self.min = min(values.values())
+        self.max = max(values.values())
         self.range = self.max - self.min
         self.mincol = {'r' : 0, 'g' : 255, 'b' : 255}
         self.maxcol = {'r' : 255, 'g' : 255, 'b' : 255}
@@ -21,13 +21,15 @@ class colour_map:
             col = dict()
             for c in ('r', 'g', 'b'):
                 col[c] = self.mincol[c] + (self.maxcol[c] - self.mincol[c]) * (x - self.min) / self.range
-        colstring = "%02x%02x%02x%02x" % (c['r'], c['g'], c['b'], self.a)
+                col[c] = int(round(col[c]))
+        print col
+        colstring = "%02x%02x%02x%02x" % (col['r'], col['g'], col['b'], self.a)
         print colstring
         return colstring
 
 def parse_multipolygon(kml, code, db_poly, abs_data, colmap):
     multipoly = kml.newmultigeometry()
-    mulitpoly.style.polystyle.color = get_value(abs_data[code])
+    multipoly.style.polystyle.color = colmap.get_value(abs_data[code])
     db_poly = db_poly[14:-2]
     for poly in db_poly.split('),('):
         spoints = [point.split(' ') for point in poly.split(',')]
@@ -57,12 +59,12 @@ def gen_pop_kml(db, filename):
     abs_dataj = abs_get(d)['series']
     abs_data = dict()
     for p in abs_dataj:
-        abs_data[p['concepts'][4]["Name"]] = p['concepts'][4]["Value"]
+        abs_data[int(p['concepts'][4]["Value"])] = float(p['observations'][0]['Value'])
     print abs_data
     colmap = colour_map(abs_data)
     for row in cur:
         if row[1] is not None:
-            parse_multipolygon(kml, row[0], row[1], abs_data, colmap)
+            parse_multipolygon(kml, int(row[0]), row[1], abs_data, colmap)
     kml.save(filename)
 
 gen_pop_kml(DB(), 'pop.kml')
