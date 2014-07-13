@@ -94,6 +94,19 @@ def get_population_data():
         d['and'] += ',MEASURE.TT,POUR.TOT'
         return abs_get_parse(d)
 
+# usual place of residence as density
+def get_population_density():
+    counts = get_population_data()
+    db = DB()
+    cur = db.cursor()
+    cur.execute("select sa2_main, area_sqkm from sa2 where sa2_main like '8%'")
+    density = {}
+    for row in cur:
+        region = int(row[0])
+        if row[1] is not None and region in counts:
+            density[region] = counts[region] / float(row[1])
+    return density
+
 # median age of persons by SA2
 def get_age_data():
     if ABS_CSV:
@@ -169,7 +182,7 @@ def get_hospitals_data():
     return result
 
 
-data_funcs = {'population': get_population_data,
+data_funcs = {'population': get_population_density,
               'age': get_age_data,
               'income': get_income_data,
               'household': get_household_data,
