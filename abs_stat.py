@@ -186,7 +186,10 @@ def get_scores(params):
         value_min = min(values.values())
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.items()}
         for k, v in values.items():
-            scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
+            scores[k] = scores.get(k, 0.0) + \
+                        (1 - (1.0 - abs(v - value_rating / 6.0)) \
+                         if dataset in VALUE_REVERSE else \
+                         (1.0 - abs(v - value_rating / 6.0))) * weighting
     for exclusion in ABS_EXCLUSION:
         try:
             del scores[exclusion]
