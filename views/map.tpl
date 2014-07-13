@@ -117,7 +117,7 @@
                 </div>
                 <div class="clear"></div>
                 <div class="tab-content tab-content-1">
-		  <h3>Play With Things!</h3>
+		  <h3>Play With Things! Adjust the factors below to see which suburb is right for you.</h3>
                     <div id="sliders"></div>
                 </div>
                 <div class="tab-content tab-content-2">
