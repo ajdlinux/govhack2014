@@ -125,6 +125,7 @@ def get_schools_data():
     db = DB()
     cur = db.cursor()
     cur.execute("select sa2_name, school_distance from sa2;")
+    result = {}
     for row in cur:
         result[int(row[0])] = float(row[1])
     return result
