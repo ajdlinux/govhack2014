@@ -69,9 +69,9 @@ function addPointLayer(layerName) {
 
 function displaySliders() {
     sliders.forEach(function (slider) {
-	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
+	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input class="slider" name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
 	
-	$('#sliders-advanced').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + ' Care Factor</label><input name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
+	$('#sliders-advanced').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + ' Care Factor</label><input class="slider" name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
 
 	if (loadPageVar(slider['id'])) {
 	    $('[name=slider_' + slider['id'] + ']')[0].value = loadPageVar(slider['id']);
