@@ -14,7 +14,16 @@ def gen_schools_kml(db):
         p = kml.newpoint(name=row[0], coords=[to_point(row[1])])
     return kml.kml()
 
-point_kml_funcs = {'schools': gen_schools_kml}
+def gen_hospitals_kml(db):
+    cur = db.cursor()
+    cur.execute("select name, ST_AsText(location) from hospitals");
+    kml = simplekml.Kml()
+    for row in cur:
+        p = kml.newpoint(name=row[0], coords=[to_point(row[1])])
+    return kml.kml()
+
+point_kml_funcs = {'schools': gen_schools_kml,
+                   'hospitals': gen_hospitals_kml}
 
 def point_layer_kml(layer):
     db = DB()
@@ -25,8 +34,3 @@ def point_layer_kml(layer):
     db.disconnect()
     return result
 
-#db = DB()
-#f = open('schools.kml', 'w')
-#f.write(gen_schools_kml(db))
-#f.close()
-#db.disconnect()
