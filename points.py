@@ -18,8 +18,13 @@ def gen_schools_kml(db):
 point_kml_funcs = {'schools': gen_schools_kml}
 
 def point_layer_kml(layer):
+    db = DB()
     if layer in point_kml_funcs:
-        return point_kml_funcs[layer]()
+        result = point_kml_funcs[layer](db)
+    else:
+        raise Exception
+    db.disconnect()
+    return result
 
 #db = DB()
 #f = open('schools.kml', 'w')
