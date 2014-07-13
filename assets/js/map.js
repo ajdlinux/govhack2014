@@ -72,10 +72,10 @@ function displaySliders() {
 	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /><input name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
 	
 	if (loadPageVar(slider['id'])) {
-	    $('[name=slider_' + slider['id'])[0].value = loadPageVar(slider['id']);
+	    $('[name=slider_' + slider['id'] + ']')[0].value = loadPageVar(slider['id']);
 	}
 	if (loadPageVar(slider['id'] + '_weight')) {
-	    $('[name=slider_' + slider['id'] + '_weight')[0].value = loadPageVar(slider['id'] + '_weight');
+	    $('[name=slider_' + slider['id'] + '_weight]')[0].value = loadPageVar(slider['id'] + '_weight');
 	}
     });
 }
