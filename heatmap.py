@@ -73,6 +73,6 @@ def gen_all_kml(db, folder):
         gen_kml_file(db, data, os.path.join(folder, name + '.kml'))
         print "Finished %s" % name
 
-db = DB()
-gen_all_kml(db, "assets")
-db.close()
+#db = DB()
+#gen_all_kml(db, "assets")
+#db.close()

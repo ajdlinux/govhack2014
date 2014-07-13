@@ -24,42 +24,58 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import sys
 import os
 
-import bottle
+from bottle import route, view, request, static_file, run
 
-import settings
+from settings import *
+from abs_stat import data_funcs, get_scores
+from heatmap import gen_kml
+from db import DB
 
-@bottle.route('/')
-@bottle.route('/index.html')
-@bottle.view('index')
+@route('/')
+@route('/index.html')
+@view('index')
 def index():
-    return {'hostname': settings.SERVER_HOSTNAME}
+    return {'hostname': SERVER_HOSTNAME}
 
-@bottle.route('/about')
-@bottle.view('about')
+@route('/about')
+@view('about')
 def about():
     return {}
 
-@bottle.route('/contact')
-@bottle.view('contact')
+@route('/contact')
+@view('contact')
 def contact():
     return {}
 
-@bottle.route('/map')
-@bottle.view('map')
+@route('/map')
+@view('map')
 def map():
     return {}
 
-@bottle.route('/heatmap.kml')
+@route('/heatmap.kml')
 def heatmap():
-    return "" # TODO TODO TODO
+    query = request.query.decode()
+    params = []
+    for param in data_funcs:
+        try:
+            params.append((param,
+                           float(query[param + '_val']),
+                           float(query[param + '_weight'])))
+        except:
+            pass
+    db = DB()
+    kml = gen_kml(db, get_scores(params))
+    db.disconnect()
+    return kml
 
-@bottle.route('/pointlayer.kml')
+
+@route('/pointlayer.kml')
 def pointlayer():
     return "" # TODO TODO TODO
 
-@bottle.route('/<path:path>')
+@route('/<path:path>')
 def static(path):
-    return bottle.static_file(path, root=os.path.join(os.path.dirname(__file__), 'assets'))
+    return static_file(path, root=os.path.join(os.path.dirname(__file__), 'assets'))
 
 if __name__ == "__main__":
     # Make sure we're in the right directory!
@@ -68,4 +84,4 @@ if __name__ == "__main__":
         sys.path.append(os.path.dirname(__file__))
 
     # Lights! Camera! ACTION!
-    bottle.run(reloader=True, debug=True, host=settings.SERVER_HOST, port=settings.SERVER_PORT)
+    run(reloader=True, debug=True, host=SERVER_HOST, port=SERVER_PORT)
