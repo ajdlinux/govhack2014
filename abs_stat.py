@@ -28,7 +28,7 @@ def abs_get_csv(table, field):
     with open(os.path.join(ABS_CSV_PATH, "2011Census_%s_ACT_SA2_short.csv" % table)) \
          as f:
         r = csv.DictReader(f)
-        result = {row['region_id']: float(row[field]) for row in r}
+        result = {int(row['region_id']): float(row[field]) for row in r}
     return result
 
 # call query and return as dict from region (int) to observation (float)
