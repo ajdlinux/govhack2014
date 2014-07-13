@@ -49,11 +49,11 @@ function initialize() {
 }
 
 function addPointLayer(layerName) {
-    pointLayers[layerName] = new google.maps.KmlLayer({
+    pointLayers[layerName] = [new google.maps.KmlLayer({
 	url: 'http://' + window.location.host + '/pointlayer.kml?layer=' + layerName,
 	preserveViewport: true,
 	suppressInfoWindows: true,
-	map: map});
+	map: map}), true];
 }
 
 function displaySliders() {
@@ -67,6 +67,26 @@ function displaySliders() {
 	    $('[name=slider_' + slider['id'] + '_weight')[0].value = loadPageVar(slider['id'] + '_weight');
 	}
     });
+
+    if ($('[name=slider_schools]')[0].value == 0) {
+	if (pointLayers['schools'][1]) {
+	    pointLayers['schools'][0].setMap(null);
+	}
+    } else {
+	if (pointLayers['schools'][1]) {
+	    pointLayers['schools'][0].setMap(map);
+	}
+    }
+
+    if ($('[name=slider_hospitals]')[0].value == 0) {
+	if (pointLayers['hospitals'][1]) {
+	    pointLayers['hospitals'][0].setMap(null);
+	}
+    } else {
+	if (pointLayers['hospitals'][1]) {
+	    pointLayers['hospitals'][0].setMap(map);
+	}
+    }
 
 }
 
