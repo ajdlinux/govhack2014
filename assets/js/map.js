@@ -30,6 +30,11 @@ var sliders = [
      'high_label': 'Further'}
 ];
 
+// From https://developer.mozilla.org/en-US/docs/Web/API/window.location
+function loadPageVar (sVar) {
+    return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
+
 function initialize() {
     var mapOptions = {
         center: new google.maps.LatLng(-35.3075, 149.1244),
@@ -40,6 +45,7 @@ function initialize() {
     displaySliders();
     loadHeatmapLayer();
     addPointLayer('schools');
+    addPointLayer('hospitals');
 }
 
 function addPointLayer(layerName) {
@@ -53,7 +59,15 @@ function addPointLayer(layerName) {
 function displaySliders() {
     sliders.forEach(function (slider) {
 	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /><input name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
+	
+	if (loadPageVar(slider['id'])) {
+	    $('[name=slider_' + slider['id'])[0].value = loadPageVar(slider['id']);
+	}
+	if (loadPageVar(slider['id'] + '_weight')) {
+	    $('[name=slider_' + slider['id'] + '_weight')[0].value = loadPageVar(slider['id'] + '_weight');
+	}
     });
+
 }
 
 function loadHeatmapLayer() {
