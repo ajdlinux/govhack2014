@@ -38,14 +38,19 @@ from db import DB
 def index():
     return {'hostname': SERVER_HOSTNAME}
 
-@route('/about')
-@view('about')
-def about():
+@route('/aboutus')
+@view('aboutus')
+def aboutus():
     return {}
 
 @route('/contact')
 @view('contact')
 def contact():
+    return {}
+
+@route('/questions')
+@view('questions')
+def questions():
     return {}
 
 @route('/map')
