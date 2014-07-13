@@ -39,6 +39,7 @@ function initialize() {
 				  mapOptions);
     displaySliders();
     loadHeatmapLayer();
+    addPointLayer('schools');
 }
 
 function addPointLayer(layerName) {
