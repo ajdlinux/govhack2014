@@ -134,15 +134,15 @@ def get_schools_data():
     return result
 
 # distance to closest hospital by SA2
-def get_hospitals_data():
-    return {1: 1.0}
+#def get_hospitals_data():
+#    return {1: 1.0}
 
 data_funcs = {'population': get_population_data,
               'age': get_age_data,
               'income': get_income_data,
               'household': get_household_data,
-              'schools': get_schools_data,
-              'hospitals': get_hospitals_data}
+              'schools': get_schools_data,}
+#              'hospitals': get_hospitals_data}
 
 def get_scores(params):
     scores = {}
