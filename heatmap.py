@@ -54,7 +54,7 @@ def gen_kml(db, sa2_values):
     # do stuff with it
     colmap = ColourMap(sa2_values)
     for row in cur:
-        if row[1] is not None and int(row[1]) not in ABS_EXCLUSION:
+        if row[1] is not None and int(row[0]) not in ABS_EXCLUSION:
             parse_multipolygon(kml, int(row[0]), row[1], sa2_values, colmap)
     return kml.kml()
 
