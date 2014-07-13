@@ -131,6 +131,7 @@ def get_schools_data():
             result[int(row[0])] = float(row[1])
         except:
             pass # this is best error handling
+    print result
     return result
 
 # distance to closest hospital by SA2
