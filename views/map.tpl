@@ -10,7 +10,7 @@
     </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=false&key=AIzaSyAMjFBfOqfXql5zrvWlgiDoGHcttszVxIA">
+      src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAMjFBfOqfXql5zrvWlgiDoGHcttszVxIA">
     </script>
     <script type="text/javascript" src="/js/map.js">
     </script>
