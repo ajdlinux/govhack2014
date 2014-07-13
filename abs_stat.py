@@ -124,7 +124,7 @@ def get_household_data():
 def get_schools_data():
     db = DB()
     cur = db.cursor()
-    cur.execute("select sa2_main, school_distance from sa2;")
+    cur.execute("select sa2_main, school_distance from sa2 where sa2_main like '8%';")
     result = {}
     for row in cur:
         try:
@@ -156,8 +156,8 @@ def get_scores(params):
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.items()}
         for k, v in values.items():
             scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
-        if dataset == "schools":
-            print values
+        #if dataset == "schools":
+        #    print values
             
     print " =================== SCORES ================= "
     print scores
