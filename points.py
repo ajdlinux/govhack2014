@@ -4,7 +4,6 @@ import re
 
 def to_point(str):
     m = re.match(r"POINT\((\S+) (\S+)\)", str)
-    print m.groups()
     return (m.group(1), m.group(2))
 
 def gen_schools_kml(db):
