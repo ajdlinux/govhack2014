@@ -33,3 +33,10 @@ DB_PASSWORD     = 'whereshouldi'
 # ABS Data settings
 ABS_CSV = True
 ABS_CSV_PATH = 'data/DataPacks/ACT'
+ABS_EXCLUSION = [
+    899999499, # No usual address
+    897979799, # Shipping
+    801031032, # Kowen
+    801021029, # Namadgi
+    801041043, # Hall
+]

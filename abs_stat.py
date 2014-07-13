@@ -30,6 +30,11 @@ def abs_get_csv(table, field):
          as f:
         r = csv.DictReader(f)
         result = {int(row['region_id']): float(row[field]) for row in r}
+    for exclusion in ABS_EXCLUSION:
+        try:
+            del result[exclusion]
+        except:
+            pass
     return result
 
 # call query and return as dict from region (int) to observation (float)
@@ -46,6 +51,11 @@ def abs_get_parse(get_dict):
             print 'Failed to find REGION code'
             raise ABSAPIError('No REGION code found')
         abs_data[region] = float(a['observations'][0]['Value'])
+    for exclusion in ABS_EXCLUSION:
+        try:
+            del abs_data[exclusion]
+        except:
+            pass
     return abs_data
 
 def get_concepts(datasetid):
