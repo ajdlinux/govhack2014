@@ -10,7 +10,7 @@ def import_schools(db, filename):
         print line
         coord = [float(p) for p in line[-1].strip('"').strip('(').strip(')').split(', ')]
         print coord	
-        line[-1] = "(%f, %f)" % tuple(coord)
+        line[-1] = "(%f, %f)" % (coord[1], coord[0])
         cur.execute("insert into schools (name, address, Suburb, Sector, location) values (%s, %s, %s, %s, %s)", line)
     f.close()
     cur.execute("commit")
