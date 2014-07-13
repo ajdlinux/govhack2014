@@ -84,7 +84,7 @@ function loadHeatmapLayer() {
 	map: map});
 
 
-    if ($('[name=slider_schools]')[0].value == 0) {
+    if ($('[name=slider_schools_weight]')[0].value == 0) {
 	if (pointLayers['schools'][1]) {
 	    pointLayers['schools'][0].setMap(null);
 	}
@@ -94,7 +94,7 @@ function loadHeatmapLayer() {
 	}
     }
 
-    if ($('[name=slider_hospitals]')[0].value == 0) {
+    if ($('[name=slider_hospitals_weight]')[0].value == 0) {
 	if (pointLayers['hospitals'][1]) {
 	    pointLayers['hospitals'][0].setMap(null);
 	}
