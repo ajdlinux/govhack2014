@@ -1,6 +1,7 @@
 import simplekml
 from db import *
 from abs_stat import *
+from settings import *
 import re
 import os
 
@@ -53,7 +54,7 @@ def gen_kml(db, sa2_values):
     # do stuff with it
     colmap = ColourMap(sa2_values)
     for row in cur:
-        if row[1] is not None:
+        if row[1] is not None and row[1] not in ABS_EXCLUSION:
             parse_multipolygon(kml, int(row[0]), row[1], sa2_values, colmap)
     return kml.kml()
 
