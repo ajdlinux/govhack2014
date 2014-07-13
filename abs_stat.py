@@ -127,8 +127,10 @@ def get_schools_data():
     cur.execute("select sa2_main, school_distance from sa2;")
     result = {}
     for row in cur:
-        print row[0], row[1]
-        result[int(row[0])] = float(row[1])
+        try:
+            result[int(row[0])] = float(row[1])
+        except:
+            pass # this is best error handling
     return result
 
 # distance to closest hospital by SA2
