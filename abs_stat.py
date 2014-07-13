@@ -158,7 +158,7 @@ def get_scores(params):
             scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
         if dataset == "schools":
             print values
-            print " =================== SCORES ================= "
-            print scores
-
+            
+    print " =================== SCORES ================= "
+    print scores
     return scores # we don't bother normalising, that can be done later
