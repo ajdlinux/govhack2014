@@ -43,9 +43,9 @@ function initialize() {
     map = new google.maps.Map(document.getElementById("map-canvas"),
 				  mapOptions);
     displaySliders();
-    loadHeatmapLayer();
     addPointLayer('schools');
     addPointLayer('hospitals');
+    loadHeatmapLayer();
 }
 
 function addPointLayer(layerName) {
@@ -67,6 +67,22 @@ function displaySliders() {
 	    $('[name=slider_' + slider['id'] + '_weight')[0].value = loadPageVar(slider['id'] + '_weight');
 	}
     });
+}
+
+function loadHeatmapLayer() {
+    params = {}
+    sliders.forEach(function (slider) {
+	params[slider['id'] + '_val'] = $('[name=slider_' + slider['id'] + ']')[0].value;
+	params[slider['id'] + '_weight'] = $('[name=slider_' + slider['id'] + '_weight]')[0].value;
+    });
+    newHeatmapUrl = 'http://' + window.location.host + '/heatmap.kml?' + $.param(params);
+    heatmapLayer.setMap(null);
+    heatmapLayer = new google.maps.KmlLayer({
+	url: newHeatmapUrl,
+	preserveViewport: true,
+	suppressInfoWindows: true,
+	map: map});
+
 
     if ($('[name=slider_schools]')[0].value == 0) {
 	if (pointLayers['schools'][1]) {
@@ -88,21 +104,7 @@ function displaySliders() {
 	}
     }
 
-}
 
-function loadHeatmapLayer() {
-    params = {}
-    sliders.forEach(function (slider) {
-	params[slider['id'] + '_val'] = $('[name=slider_' + slider['id'] + ']')[0].value;
-	params[slider['id'] + '_weight'] = $('[name=slider_' + slider['id'] + '_weight]')[0].value;
-    });
-    newHeatmapUrl = 'http://' + window.location.host + '/heatmap.kml?' + $.param(params);
-    heatmapLayer.setMap(null);
-    heatmapLayer = new google.maps.KmlLayer({
-	url: newHeatmapUrl,
-	preserveViewport: true,
-	suppressInfoWindows: true,
-	map: map});
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
