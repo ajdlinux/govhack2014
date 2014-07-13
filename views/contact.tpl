@@ -60,50 +60,24 @@
     	  <a href="#" class="go-back">CLOSE</a>
     </div>
     <div class="decoration"></div>
-    
+
     <div class="navigation">
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="index.html" class="home-icon">Homepage</a>
+                <a href="/" class="home-icon">Homepage</a>
                 <em class="inactive-menu"></em>
             </div>
-            <div class="navigation-item">
-                <a href="#" class="features-icon has-submenu">Features</a>
-                <em class="dropdown-menu"></em>
-              	<div class="submenu">
-                    <a href="type.html">Typography		 <em></em></a>
-                    <a href="jquery.html">jQuery		   <em></em></a>
-                </div>
-            </div>
-            <div class="navigation-item">
-                <a href="#" class="portfolio-icon has-submenu">Portfolios</a>
-                <em class="dropdown-menu"></em>
-                <div class="submenu">
-                	<a href="tile-folio.html">Tile Portfolio	<em></em></a>
-                    <a href="one-column.html">One Column		<em></em></a>
-                    <a href="two-column.html">Two Column		<em></em></a>
-                    <a href="three-column.html">Three Columns <em></em></a>
-                </div>
-            </div>
-            <div class="navigation-item">
-                <a href="#" class="gallery-icon has-submenu">Gallery</a>
-                <em class="dropdown-menu"></em>
-                <div class="submenu">
-                	<a href="tile-gallery.html">Tile Gallery<em></em></a>
-                    <a href="thumbnail-gallery.html">Thumb Gallery<em></em></a>
-                </div>
-            </div>
-            <div class="navigation-item">
-                <a href="videos.html" class="videos-icon">Videos</a>
+	    <div class="navigation-item">
+              <a href="about" class="features-icon has-submenu">About Us</a>
                 <em class="inactive-menu"></em>
             </div>
-            <div class="navigation-item">
-                <a href="contact.html" class="contact-icon">Contact</a>
-                <em class="active-menu"></em>
+                        <div class="navigation-item">
+                <a href="contact" class="contact-icon">Contact</a>
+                <em class="inactive-menu"></em>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
 
 <div class="content">

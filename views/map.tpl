@@ -84,7 +84,7 @@
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="index.html" class="home-icon">Homepage</a>
+                <a href="/" class="home-icon">Homepage</a>
                 <em class="inactive-menu"></em>
             </div>
 	    <div class="navigation-item">

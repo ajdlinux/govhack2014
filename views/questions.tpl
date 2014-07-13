@@ -60,8 +60,7 @@
         <a href="#" class="go-back">CLOSE</a>
     </div>
     <div class="decoration"></div>
-    
-    <div class="navigation">
+        <div class="navigation">
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
@@ -78,10 +77,10 @@
             </div>
             <div class="navigation-item">
                 <a href="#" class="portfolio-icon has-submenu">Portfolios</a>
-                <em class="dropdown-menu dropup-menu"></em>
-                <div class="submenu active-submenu">
+                <em class="dropdown-menu"></em>
+                <div class="submenu">
                 	<a href="tile-folio.html">Tile Portfolio	<em></em></a>
-                    <a href="one-column.html">One Column		<em class="selected-submenu"></em></a>
+                    <a href="one-column.html">One Column		<em></em></a>
                     <a href="two-column.html">Two Column		<em></em></a>
                     <a href="three-column.html">Three Columns <em></em></a>
                 </div>
@@ -100,7 +99,7 @@
             </div>
             <div class="navigation-item">
                 <a href="contact.html" class="contact-icon">Contact</a>
-                <em class="inactive-menu"></em>
+                <em class="active-menu"></em>
             </div>
         </div>
     </div>
