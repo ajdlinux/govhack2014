@@ -11,20 +11,18 @@ def gen_schools_kml(db):
     cur = db.cursor()
     cur.execute("select name, ST_AsText(location) from schools");
     kml = simplekml.Kml()
-    style = simplekml.IconStyle(color = SCHOOLS_COLOR)
     for row in cur:
         p = kml.newpoint(name=row[0], coords=[to_point(row[1])])
-        p.style.iconstyle = style
+        p.style.iconstyle.color = SCHOOLS_COLOR
     return kml.kml()
 
 def gen_hospitals_kml(db):
     cur = db.cursor()
     cur.execute("select name, ST_AsText(location) from hospitals");
     kml = simplekml.Kml()
-    style = simplekml.IconStyle(color = HOSPITALS_COLOR)
     for row in cur:
         p = kml.newpoint(name=row[0], coords=[to_point(row[1])])
-        p.style.iconstyle = style
+        p.style.iconstyle.color = HOSPITALS_COLOR
     return kml.kml()
 
 point_kml_funcs = {'schools': gen_schools_kml,
