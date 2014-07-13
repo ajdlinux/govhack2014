@@ -52,8 +52,7 @@ function addPointLayer(layerName) {
 
 function displaySliders() {
     sliders.forEach(function (slider) {
-	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /><input name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" />
-</div>');
+	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /><input name="slider_' + slider['id'] + '_weight" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
     });
 }
 
