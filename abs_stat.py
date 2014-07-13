@@ -138,7 +138,7 @@ data_funcs = {'population': get_population_data,
               'income': get_income_data,
               'household': get_household_data,
               'schools': get_schools_data,
-              'hospitals', get_hospitals_data}
+              'hospitals': get_hospitals_data}
 
 def get_scores(params):
     scores = {}
