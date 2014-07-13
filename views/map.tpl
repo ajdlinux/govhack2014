@@ -134,8 +134,8 @@
             
             <div class="one-third last-column">
                 <div class="tabs">
-                    <a href="#" class="tab-but tab-but-1 tab-active">Tab 1</a>
-                    <a href="#" class="tab-but tab-but-2">Tab 2</a>   
+                    <a href="#" class="tab-but tab-but-1 tab-active">Basic</a>
+                    <a href="#" class="tab-but tab-but-2">Advanced</a>   
                 </div>
                 <div class="clear"></div>
                 <div class="tab-content tab-content-1">
