@@ -3,7 +3,33 @@ var map;
 var heatmapLayer = new google.maps.KmlLayer(null);
 var pointLayers = [];
 
-var sliders = [];
+
+var sliders = [
+    {'id': 'income',
+     'name': 'Income',
+     'low_label': 'Low',
+     'high_label': 'High'},
+    {'id': 'population', // TODO density
+     'name': 'Population', // TODO density
+     'low_label': 'Low',
+     'high_label': 'High'},
+    {'id': 'age',
+     'name': 'Median Age',
+     'low_label': 'Younger',
+     'high_label': 'Older'},
+    {'id': 'household',
+     'name': 'Household Type',
+     'low_label': 'Singles/Couples',
+     'high_label': 'Families'},
+    {'id': 'schools',
+     'name': 'Distance to Schools',
+     'low_label': 'Closer',
+     'high_label': 'Further'},
+    {'id': 'hospitals',
+     'name': 'Distance to Hospitals',
+     'low_label': 'Closer',
+     'high_label': 'Further'}
+];
 
 function initialize() {
     var mapOptions = {
@@ -12,18 +38,8 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById("map-canvas"),
 				  mapOptions);
-    questionsTest();
     displaySliders();
-    
-}
-
-function loadHeatmapLayer(heatmapUrl) {
-    heatmapLayer.setMap(null);
-    heatmapLayer = new google.maps.KmlLayer({
-	url: heatmapUrl,
-	preserveViewport: true,
-	suppressInfoWindows: true,
-	map: map});
+    loadHeatmapLayer();
 }
 
 function togglePointLayer(layerName) {
@@ -34,56 +50,25 @@ function togglePointLayer(layerName) {
     }
 }
 
-function addKmlLayerTest() {
-    loadHeatmapLayer('http://54.79.15.245/population.kml?bananadbdubhdubhdubdubdubdubhudhbujdhbdujbhdgj');
-}
-
 function displaySliders() {
     sliders.forEach(function (slider) {
-	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="updateSliders()" /></div>');
+	$('#sliders').append('<div class="slider"><label for="slider_' + slider['id'] + '">' + slider['name'] + '</label><input name="slider_' + slider['id'] + '" type="range" min="0" max="6" onchange="loadHeatmapLayer()" /></div>');
     });
 }
 
-function updateSliders() {
+function loadHeatmapLayer() {
     params = {}
     sliders.forEach(function (slider) {
 	params[slider['id'] + '_val'] = $('[name=slider_' + slider['id'] + ']')[0].value;
 	params[slider['id'] + '_weight'] = 2; // TODO fix
-	//alert($('[name=slider_' + slider['id'] + ']')[0].value);
     });
     newHeatmapUrl = 'http://' + window.location.host + '/heatmap.kml?' + $.param(params);
-    //alert(newHeatmapUrl);
-    loadHeatmapLayer(newHeatmapUrl);
-}
-
-function questionsTest() {
-    sliders = [
-	{'id': 'income',
-	 'name': 'Income',
-	 'low_label': 'Low',
-	 'high_label': 'High'},
-	{'id': 'population', // TODO density
-	 'name': 'Population', // TODO density
-	 'low_label': 'Low',
-	 'high_label': 'High'},
-	{'id': 'age',
-	 'name': 'Median Age',
-	 'low_label': 'Younger',
-	 'high_label': 'Older'},
-	{'id': 'household',
-	 'name': 'Household Type',
-	 'low_label': 'Singles/Couples',
-	 'high_label': 'Families'},
-	{'id': 'schools',
-	 'name': 'Distance to Schools',
-	 'low_label': 'Closer',
-	 'high_label': 'Further'},
-	{'id': 'hospitals',
-	 'name': 'Distance to Hospitals',
-	 'low_label': 'Closer',
-	 'high_label': 'Further'}
-    ];
+    heatmapLayer.setMap(null);
+    heatmapLayer = new google.maps.KmlLayer({
+	url: newHeatmapUrl,
+	preserveViewport: true,
+	suppressInfoWindows: true,
+	map: map});
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-google.maps.event.addDomListener(window, 'load', addKmlLayerTest);
