@@ -45,7 +45,7 @@
 	}
     </style>
 <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=false"><!-- TODO add api key -->
+      src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAMjFBfOqfXql5zrvWlgiDoGHcttszVxIA">
     </script>
     <script type="text/javascript" src="scripts/map.js">
     </script>
