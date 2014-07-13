@@ -30,12 +30,7 @@ var sliders = [
      'high_label': 'Further'}
 ];
 
-// From https://developer.mozilla.org/en-US/docs/Web/API/window.location
-/*function loadPageVar (sVar) {
-    return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-}*/
-
-
+// From http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
 function loadPageVar(val) {
     var result = "Not found",
         tmp = [];
