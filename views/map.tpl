@@ -15,10 +15,10 @@
     <script type="text/javascript" src="/js/map.js">
     </script>
 </body>
-<div>
+<div style="height: 100%;">
 <div class="map">
 <div class="map" id="map-canvas" />
 </div>
 </div>
-<div id="sliders"></div>
+<div id="sliders" />
 </html>
