@@ -131,7 +131,7 @@ def get_schools_data():
             result[int(row[0])] = float(row[1])
         except:
             pass # this is best error handling
-    print result
+    #print result
     return result
 
 # distance to closest hospital by SA2
@@ -154,7 +154,8 @@ def get_scores(params):
         value_max = max(values.values())
         value_min = min(values.values())
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.items()}
-        
+        if dataset == "schools":
+            print values
         for k, v in values.items():
             scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
     return scores # we don't bother normalising, that can be done later
