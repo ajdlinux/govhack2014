@@ -43,6 +43,10 @@
 		float:left;
 		margin-right:4%;	
 	}
+	  
+	  .slider {
+	  width: 100%;
+	  }
     </style>
 <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAMjFBfOqfXql5zrvWlgiDoGHcttszVxIA">
