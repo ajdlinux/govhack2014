@@ -9,8 +9,11 @@ class ColourMap(object):
         self.min = min(values.values())
         self.max = max(values.values())
         self.range = self.max - self.min
-        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
-        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
+#        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
+#        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
+        self.mincol = {'r' : 230, 'g' : 255, 'b' : 230}
+        self.maxcol = {'r' : 0, 'g' : 255, 'b' : 0}
+
         self.a = 127
         
     def get_value(self, x):
