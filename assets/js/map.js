@@ -21,6 +21,7 @@ function loadHeatmapLayer(heatmapUrl) {
     heatmapLayer.setMap(null);
     heatmapLayer = new google.maps.KmlLayer({
 	url: heatmapUrl,
+	preserveViewport: true,
 	suppressInfoWindows: true,
 	map: map});
 }
