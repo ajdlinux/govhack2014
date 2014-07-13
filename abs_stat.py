@@ -171,9 +171,9 @@ def get_scores(params):
         values = {k: (v - value_min) / (value_max - value_min) for k, v in values.items()}
         for k, v in values.items():
             scores[k] = scores.get(k, 0.0) + (1.0 - abs(v - value_rating / 6.0)) * weighting
-        #if dataset == "schools":
-        #    print values
-            
-    print " =================== SCORES ================= "
-    print scores
+    for exclusion in ABS_EXCLUSION:
+        try:
+            del scores[exclusion]
+        except:
+            pass
     return scores # we don't bother normalising, that can be done later
