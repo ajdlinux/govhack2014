@@ -51,7 +51,7 @@ function updateSliders() {
 	//alert($('[name=slider_' + slider['id'] + ']')[0].value);
     });
     newHeatmapUrl = 'http://' + window.location.host + '/heatmap.kml?' + $.param(params);
-    alert(newHeatmapUrl);
+    //alert(newHeatmapUrl);
     loadHeatmapLayer(newHeatmapUrl);
 }
 
