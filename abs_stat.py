@@ -4,6 +4,7 @@ import urllib2
 import json
 import csv
 from settings import *
+from db import *
 
 class ABSAPIError(Exception):
     pass
@@ -72,7 +73,7 @@ def add_sa2(dict):
     dict['and'] += 'STATE.8,REGIONTYPE.SA2'
 
 # usual place of residence (probably)
-def get_pop_data():
+def get_population_data():
     if ABS_CSV:
         return abs_get_csv('B03', 'Total_Total')
     else:
@@ -119,16 +120,25 @@ def get_household_data():
         d['and'] += ',MEASURE.AHS'
         return abs_get_parse(d)
 
-data_funcs = {'population': get_pop_data,
+# distance to closest school by SA2
+def get_schools_data():
+    db = DB()
+    cur = db.cursor()
+    cur.execute("select sa2_name, school_distance from sa2;")
+    for row in cur:
+        result[int(row[0])] = float(row[1])
+    return result
+
+# distance to closest hospital by SA2
+def get_hospitals_data():
+    return {}
+
+data_funcs = {'population': get_population_data,
               'age': get_age_data,
               'income': get_income_data,
-              'household': get_household_data}
-
-
-
-def get_data_funcs():
-    return [('population', get_pop_data), ('age', get_age_data), 
-        ('income', get_income_data), ('household', get_household_data)]
+              'household': get_household_data,
+              'schools': get_schools_data,
+              'hospitals', get_hospitals_data}
 
 def get_scores(params):
     scores = {}
