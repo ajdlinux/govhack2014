@@ -59,19 +59,19 @@
      
     <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div> 
-    	<a href="questions.html">
+    	<a href="questions">
         	<img class="nav-icon" src="images/icons/misc/home.png" alt="img">
             <div class="nav-overlay"></div>
         	<img class="nav-image" src="images/general-nature/1s.jpg" alt="img">
             <em>Get Started!</em>
         </a>
-        <a href="aboutus.html">
+        <a href="aboutus">
         	<img class="nav-icon" src="images/icons/misc/infoabout.png" alt="img">
             <div class="nav-overlay"></div>
         	<img class="nav-image" src="images/general-nature/8s.jpg" alt="img">
             <em>About Us</em>
         </a>
-    	<a href="contact.html">
+    	<a href="contact">
         	<img class="nav-icon" src="images/icons/misc/mail.png" alt="img">
             <div class="nav-overlay"></div>
         	<img class="nav-image" src="images/general-nature/6s.jpg" alt="img">
