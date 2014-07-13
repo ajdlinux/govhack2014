@@ -26,7 +26,11 @@ function loadHeatmapLayer(heatmapUrl) {
 }
 
 function togglePointLayer(layerName) {
-
+    if (pointLayers[layerName]['enabled']) {
+	pointLayers[layerName]['layer'].setMap(null);
+    } else {
+	
+    }
 }
 
 function addKmlLayerTest() {
@@ -44,7 +48,7 @@ function updateSliders() {
     sliders.forEach(function (slider) {
 	params[slider['id'] + '_val'] = $('[name=slider_' + slider['id'] + ']')[0].value;
 	params[slider['id'] + '_weight'] = 2; // TODO fix
-	alert($('[name=slider_' + slider['id'] + ']')[0].value);
+	//alert($('[name=slider_' + slider['id'] + ']')[0].value);
     });
     newHeatmapUrl = 'http://' + window.location.host + '/heatmap.kml?' + $.param(params);
     alert(newHeatmapUrl);
@@ -57,15 +61,15 @@ function questionsTest() {
 	 'name': 'Income',
 	 'low_label': 'Low',
 	 'high_label': 'High'},
-	{'id': 'density',
-	 'name': 'Population Density',
+	{'id': 'population', // TODO density
+	 'name': 'Population', // TODO density
 	 'low_label': 'Low',
 	 'high_label': 'High'},
 	{'id': 'age',
 	 'name': 'Median Age',
 	 'low_label': 'Younger',
 	 'high_label': 'Older'},
-	{'id': 'household_size',
+	{'id': 'household',
 	 'name': 'Household Type',
 	 'low_label': 'Singles/Couples',
 	 'high_label': 'Families'},
