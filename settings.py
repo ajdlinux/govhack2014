@@ -30,6 +30,9 @@ DB_DATABASE     = 'whereshouldi'
 DB_USER         = 'whereshouldi'
 DB_PASSWORD     = 'whereshouldi'
 
+# UI Settings
+VALUE_REVERSE = ['schools', 'hospitals'] # categories where lower is higher
+
 # ABS Data settings
 ABS_CSV = True
 ABS_CSV_PATH = 'data/DataPacks/ACT'
