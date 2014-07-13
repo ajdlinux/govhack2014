@@ -1,5 +1,5 @@
 <html>
-<head><title>Map of awesome</title></head>
+<head><title>Where should I?</title></head>
 <body>
 <style type="text/css">
       html { height: 100% }
