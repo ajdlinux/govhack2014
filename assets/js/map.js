@@ -3,7 +3,6 @@ var map;
 var heatmapLayer = new google.maps.KmlLayer(null);
 var pointLayers = [];
 
-
 var sliders = [
     {'id': 'income',
      'name': 'Income',
@@ -42,12 +41,12 @@ function initialize() {
     loadHeatmapLayer();
 }
 
-function togglePointLayer(layerName) {
-    if (pointLayers[layerName]['enabled']) {
-	pointLayers[layerName]['layer'].setMap(null);
-    } else {
-	
-    }
+function addPointLayer(layerName) {
+    pointLayers[layerName] = new google.maps.KmlLayer({
+	url: 'http://' + window.location.host + '/pointlayer.kml?layer=' + layerName,
+	preserveViewport: true,
+	suppressInfoWindows: true,
+	map: map});
 }
 
 function displaySliders() {

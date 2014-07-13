@@ -29,6 +29,7 @@ from bottle import route, view, request, static_file, run
 from settings import *
 from abs_stat import data_funcs, get_scores
 from heatmap import gen_kml
+from points import point_layer_kml
 from db import DB
 
 @route('/')
@@ -63,6 +64,7 @@ def heatmap():
                            float(query[param + '_weight'])))
         except:
             pass
+    # FIXME don't break when no params specified
     db = DB()
     kml = gen_kml(db, get_scores(params))
     db.disconnect()
@@ -71,7 +73,7 @@ def heatmap():
 
 @route('/pointlayer.kml')
 def pointlayer():
-    return "" # TODO TODO TODO
+    return point_layer_kml(request.query.decode()['layer'])
 
 @route('/<path:path>')
 def static(path):
