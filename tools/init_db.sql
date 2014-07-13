@@ -12,3 +12,7 @@ CREATE TABLE schools (
     Sector text,
     location point
 );
+
+CREATE FUNCTION school_distance(geometry) RETURNS float as $$
+    select ST_Distance(location, $1) as d from schools order by d asc limit 1;
+$$ LANGUAGE SQL;
