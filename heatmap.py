@@ -26,7 +26,7 @@ class ColourMap(object):
             for c in ('r', 'g', 'b'):
                 col[c] = self.mincol[c] + (self.maxcol[c] - self.mincol[c]) * (x - self.min) / self.range
                 col[c] = int(round(col[c]))
-        colstring = "%02x%02x%02x%02x" % (self.a, col['g'], col['b'], col['r'])
+        colstring = "%02x%02x%02x%02x" % (self.a, col['b'], col['g'], col['r'])
         return colstring
 
 def parse_multipolygon(kml, code, db_poly, score_data, colmap):
