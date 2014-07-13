@@ -150,15 +150,31 @@ def get_schools_data():
     return result
 
 # distance to closest hospital by SA2
-#def get_hospitals_data():
-#    return {1: 1.0}
+def get_hospitals_data():
+    db = DB()
+    cur = db.cursor()
+    cur.execute("select sa2_main, hospital_distance from sa2 where sa2_main like '8%';")
+    result = {}
+    for row in cur:
+        try:
+            result[int(row[0])] = float(row[1])
+        except:
+            pass # this is best error handling
+    #print result
+    for exclusion in ABS_EXCLUSION:
+        try:
+            del abs_data[exclusion]
+        except:
+            pass
+    return result
+
 
 data_funcs = {'population': get_population_data,
               'age': get_age_data,
               'income': get_income_data,
               'household': get_household_data,
-              'schools': get_schools_data,}
-#              'hospitals': get_hospitals_data}
+              'schools': get_schools_data,
+              'hospitals': get_hospitals_data}
 
 def get_scores(params):
     scores = {}
