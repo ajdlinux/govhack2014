@@ -9,8 +9,11 @@ class ColourMap(object):
         self.min = min(values.values())
         self.max = max(values.values())
         self.range = self.max - self.min
-        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
-        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
+#        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
+#        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
+        self.mincol = {'r' : 240, 'g' : 240, 'b' : 255}
+        self.maxcol = {'r' : 0, 'g' : 0, 'b' : 255}
+
         self.a = 127
         
     def get_value(self, x):
@@ -23,7 +26,7 @@ class ColourMap(object):
             for c in ('r', 'g', 'b'):
                 col[c] = self.mincol[c] + (self.maxcol[c] - self.mincol[c]) * (x - self.min) / self.range
                 col[c] = int(round(col[c]))
-        colstring = "%02x%02x%02x%02x" % (self.a, col['g'], col['b'], col['r'])
+        colstring = "%02x%02x%02x%02x" % (self.a, col['b'], col['g'], col['r'])
         return colstring
 
 def parse_multipolygon(kml, code, db_poly, score_data, colmap):
