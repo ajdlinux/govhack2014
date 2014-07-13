@@ -40,3 +40,7 @@ ABS_EXCLUSION = [
     801021029, # Namadgi
     801041043, # Hall
 ]
+
+# colours for points (abgr)
+SCHOOLS_COLOR 'FF00FF00'
+HOSPITALS_COLOR 'FF0000FF'
