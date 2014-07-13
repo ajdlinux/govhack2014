@@ -142,6 +142,11 @@ def get_schools_data():
         except:
             pass # this is best error handling
     #print result
+    for exclusion in ABS_EXCLUSION:
+        try:
+            del abs_data[exclusion]
+        except:
+            pass
     return result
 
 # distance to closest hospital by SA2
