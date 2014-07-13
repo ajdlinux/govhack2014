@@ -11,7 +11,7 @@ class ColourMap(object):
         self.range = self.max - self.min
 #        self.mincol = {'r' : 255, 'g' : 230, 'b' : 230}
 #        self.maxcol = {'r' : 255, 'g' : 0, 'b' : 0}
-        self.mincol = {'r' : 230, 'g' : 230, 'b' : 255}
+        self.mincol = {'r' : 240, 'g' : 240, 'b' : 255}
         self.maxcol = {'r' : 0, 'g' : 0, 'b' : 255}
 
         self.a = 127
