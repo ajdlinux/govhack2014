@@ -31,8 +31,24 @@ var sliders = [
 ];
 
 // From https://developer.mozilla.org/en-US/docs/Web/API/window.location
-function loadPageVar (sVar) {
+/*function loadPageVar (sVar) {
     return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}*/
+
+
+function loadPageVar(val) {
+    var result = "Not found",
+        tmp = [];
+    location.search
+    //.replace ( "?", "" ) 
+    // this is better, there might be a question mark inside
+    .substr(1)
+        .split("&")
+        .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === val) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
 }
 
 function initialize() {
