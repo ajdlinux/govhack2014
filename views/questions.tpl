@@ -108,17 +108,12 @@
 <div class="content">
 
     <div class="container no-bottom">
-           <h1>Questions go Here!</h1>
-           <h2> Question 1</h2>
-             <p>Where do you want to live or set up your business? </p>
-           <h2> Question 2</h2>
-             <p>Question text here </p>           
-           <h2> Question 3</h2>
-             <p>Question text here </p>           
-           <h2> Question 4</h2>
-             <p>Question text here </p>           
-           <h2> Question 5</h2>
-             <p>Question text here </p></div>
+           <h1>Where Should I...?</h1>
+           <h2><a href="/map?income=4&income_weight=4&population=3&population_weight=1&age=2&age_weight=1&household=6&household_weight=2&schools=6&schools_weight=5&hospitals=3&hospitals_weight=3">...live if I have a family with young kids?</a></h2>
+           <h2><a href="/map?income=3&income_weight=0&population=3&population_weight=5&age=6&age_weight=6&household=2&household_weight=4&schools=0&schools_weight=0&hospitals=5&hospitals_weight=5">...live if I'm an older Australian?</a></h2>
+           <h2><a href="/map?income=3&income_weight=5&population=3&population_weight=3&age=3&age_weight=3&household=5&household_weight=6&schools=6&schools_weight=6&hospitals=0&hospitals_weight=0">...start my tutoring business?</a>
+</h2>
+           <h2><a href="/map?income=3&income_weight=4&population=3&population_weight=5&age=4&age_weight=5&household=2&household_weight=3&schools=0&schools_weight=0&hospitals=4&hospitals_weight=4">...start my cafe if I'm looking for older customers?</a></h2>
         <div class="decoration"></div>
         
     </div>
